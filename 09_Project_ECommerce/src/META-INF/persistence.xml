@@ -15,6 +15,7 @@
 		<class>fr.adaming.model.Commande</class>
 		<class>fr.adaming.model.LigneCommande</class>
 		<class>fr.adaming.model.Produit</class>
+		<class>fr.adaming.model.Admin</class>
 
 		<!-- Specifier les props de hibernate -->
 		<properties>
