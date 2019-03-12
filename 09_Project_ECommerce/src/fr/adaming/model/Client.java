@@ -2,9 +2,25 @@ package fr.adaming.model;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="clients")
 public class Client {
 
 	//attribut
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="id_cli")
 	private int idClient;
 	private String nomClient;
 	private String adresse;
@@ -12,6 +28,7 @@ public class Client {
 	private String tel;
 	
 	//transoformation
+	@OneToMany(mappedBy="client",cascade=CascadeType.REMOVE,fetch=FetchType.EAGER)
 	List<Commande> listeCommandes;
 	
 	//constructeur

@@ -1,14 +1,32 @@
 package fr.adaming.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="lignecommandes")
 public class LigneCommande {
 	
 	//attribut
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="id_lc")
 	private int id;
 	private int quantite;
 	private int prix;
 	
 	//transformation
+	@ManyToOne
+	@JoinColumn(name="pro_id",referencedColumnName="id_pro")
 	Produit produit;
+	@ManyToOne
+	@JoinColumn(name="com_id",referencedColumnName="id_com")
 	Commande commande;
 	
 	//constructeur

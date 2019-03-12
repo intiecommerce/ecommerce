@@ -3,15 +3,32 @@ package fr.adaming.model;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="categories")
 public class Categorie {
 	
+	
 	//attribut
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="id_cat")
 	private int idCategorie;
 	private String nomCategorie;
 	private byte[] photo;
 	private String description;
 	
 	//transformation
+	@OneToMany(mappedBy="categorie",cascade=CascadeType.ALL,fetch=FetchType.EAGER)
 	List<Produit> listeProduits;
 	
 	//constructeur

@@ -3,9 +3,26 @@ package fr.adaming.model;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="produits")
 public class Produit {
 	
 	//attribut
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="id_pro")
 	private int idProduit;
 	private String designation;
 	private String description;
@@ -15,7 +32,10 @@ public class Produit {
 	private byte[] photo;
 	
 	//transformation
+	@ManyToOne
+	@JoinColumn(name="cat_id",referencedColumnName="id_cat")
 	Categorie categorie;
+	@OneToMany(mappedBy="commande",cascade=CascadeType.ALL,fetch=FetchType.EAGER)
 	List<LigneCommande> listeLigneCommandes;
 	
 	//constructeur
