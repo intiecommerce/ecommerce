@@ -2,6 +2,7 @@ package fr.adaming.service;
 
 import java.util.List;
 
+import fr.adaming.model.Categorie;
 import fr.adaming.model.Produit;
 
 public interface IProduitService {
@@ -14,5 +15,7 @@ public interface IProduitService {
 	public int supprProduit(Produit eIn);
 
 	public Produit getProduitById(Produit eIn);
+	
+	public List<Produit> chercherProduitParCategorie(Categorie cIn);
 
 }

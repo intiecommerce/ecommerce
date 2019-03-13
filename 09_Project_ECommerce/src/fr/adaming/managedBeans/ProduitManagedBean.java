@@ -29,6 +29,9 @@ public class ProduitManagedBean {
 
 	private UploadedFile image;
 	
+	private boolean listeVisible=false;
+	private boolean tableVisible=false;
+	
 	// constructeur
 	public ProduitManagedBean() {
 		this.produit = new Produit();
@@ -58,6 +61,22 @@ public class ProduitManagedBean {
 
 	public void setImage(UploadedFile image) {
 		this.image = image;
+	}
+
+	public boolean isListeVisible() {
+		return listeVisible;
+	}
+
+	public void setListeVisible(boolean listeVisible) {
+		this.listeVisible = listeVisible;
+	}
+
+	public boolean isTableVisible() {
+		return tableVisible;
+	}
+
+	public void setTableVisible(boolean tableVisible) {
+		this.tableVisible = tableVisible;
 	}
 
 	// methode
@@ -144,4 +163,24 @@ public class ProduitManagedBean {
 		}
 		
 	}
+	
+	public String chercherProduitParCategorie(){
+		
+		//appel de la methode
+		List<Produit> listeProduit = proService.chercherProduitParCategorie(produit.getCategorie());
+		
+		if(listeProduit !=null){
+			
+			listeVisible=true;
+			maSession.setAttribute("proSession", listeProduit);
+			return "accueilClient";
+		}else{
+			listeVisible=false;
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage("Echoué"));
+			return "accueilClient";
+		}
+	}
+	
+	
 }

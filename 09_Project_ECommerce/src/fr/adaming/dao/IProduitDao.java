@@ -5,6 +5,7 @@ import java.util.List;
 import javax.ejb.Local;
 
 import fr.adaming.model.Admin;
+import fr.adaming.model.Categorie;
 import fr.adaming.model.Produit;
 @Local
 public interface IProduitDao {
@@ -18,5 +19,7 @@ public interface IProduitDao {
 	public int supprProduit(Produit cIn);
 
 	public Produit getProduitById(Produit cIn);
+	
+	public List<Produit> chercherProduitParCategorie(Categorie cIn);
 
 }

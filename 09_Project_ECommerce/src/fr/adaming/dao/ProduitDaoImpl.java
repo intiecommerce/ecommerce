@@ -9,6 +9,7 @@ import javax.persistence.Query;
 
 import org.apache.commons.codec.binary.Base64;
 
+import fr.adaming.model.Categorie;
 import fr.adaming.model.Produit;
 @Stateless
 public class ProduitDaoImpl implements IProduitDao{
@@ -87,6 +88,24 @@ public class ProduitDaoImpl implements IProduitDao{
 	public Produit getProduitById(Produit pIn) {
 		Produit pOut = em.find(Produit.class, pIn.getIdProduit());
 		return pOut;
+	}
+
+
+	@Override
+	public List<Produit> chercherProduitParCategorie(Categorie cIn) {
+		
+		// Requete JPQL
+
+		String req = "SELECT p FROM Produit as p WHERE p.categorie.idCategorie=:pId";
+
+		// recuperer un objet de type Query
+		Query query = em.createQuery(req);
+		
+		// passage des parametres
+		query.setParameter("pId", cIn.getIdCategorie());
+
+		return query.getResultList();
+
 	}
 
 }

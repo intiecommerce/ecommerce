@@ -8,6 +8,57 @@
 <title></title>
 </h:head>
 <h:body>
-je suis dans l'accueil client
+
+<h:form>
+		Catégorie: <p:selectOneMenu value="#{proMB.produit.categorie.idCategorie}">
+	
+					<f:selectItems value="#{sessionScope.catSession}" var="cat" itemLabel="#{cat.nomCategorie}" itemValue="#{cat.idCategorie}"/>
+
+			</p:selectOneMenu>
+			<h:commandButton value="Selectionner la catégorie" action="#{proMB.chercherProduitParCategorie}" />
+</h:form>
+
+<h:form rendered ="#{proMB.listeVisible}">
+		Produit: <p:selectManyMenu value="#{proMB.produit.categorie.listeProduits}" showCheckbox="true">
+	
+					<f:selectItems value="#{sessionScope.proSession}" var="pro" itemLabel="#{pro.designation}" itemValue="#{pro.idProduit}"/>
+
+			</p:selectManyMenu>
+			<h:commandButton value="Selectionner les produits" action="#{proMB.afficherProduit}" />
+</h:form>
+
+<h:form rendered="#{proMB.tableVisible}">
+		<h1 style="color: red; text-align: center">Liste des produits</h1>
+		<p:dataTable var="pro" value="#{sessionScope.proSession}" id="Tab">
+			<p:column headerText="ID du produit">
+				<h:outputText value="#{pro.idProduit}" />
+			</p:column>
+
+			<p:column headerText="Designation du produit">
+				<h:outputText value="#{pro.designation}" />
+			</p:column>
+
+			<p:column headerText="Description">
+				<h:outputText value="#{pro.description}" />
+			</p:column>
+
+			<p:column headerText="Prix">
+				<h:outputText value="#{pro.prix}" />
+			</p:column>
+
+			<p:column headerText="Quantité">
+				<h:outputText value="#{pro.quantite}" />
+			</p:column>
+			
+			
+			<p:column headerText="Photo du produit">
+				<h:graphicImage value="#{pro.image}" />
+			</p:column>
+
+		</p:dataTable>
+	</h:form>
+	
+	
+	
 </h:body>
 </html>
