@@ -15,11 +15,12 @@
 	<h1 style="color: red; text-align: center">Formulaire pour ajouter une catégorie</h1>
 
 
-	<h:form>
+	<h:form enctype="multipart/form-data">
 
 		<h:panelGrid columns="2">
 		Nom de la catégorie: <h:inputText value="#{catMB.categorie.nomCategorie}" />
 		Description de la catégorie: <h:inputText value="#{catMB.categorie.description}" />
+				Photo: <p:fileUpload value="#{catMB.image}" mode="simple" skinSimple="true"/>
 			<h:commandButton value="Ajouter une catégorie" action="#{catMB.ajouterCategorie}" />
 		</h:panelGrid>
 

@@ -7,12 +7,33 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import org.apache.commons.codec.binary.Base64;
+
 import fr.adaming.model.Produit;
 @Stateless
 public class ProduitDaoImpl implements IProduitDao{
 
+	
 	@PersistenceContext(unitName = "PU_eCommerce")
 	private EntityManager em;
+	
+	
+	public List<Produit> recPro(){
+		
+		//requete JPQL
+		String req="SELECT p FROM Produit as p";
+		
+		//Recuperer un objet de type query
+		Query query = em.createQuery(req);
+		
+		List<Produit> listePro = query.getResultList();
+		
+		for(Produit p:listePro){
+			p.setImage("data:image/png;base64,"+Base64.encodeBase64String(p.getPhoto()));
+		}
+		return listePro;
+	}
+
 	
 	@Override
 	public List<Produit> getAllProduit() {

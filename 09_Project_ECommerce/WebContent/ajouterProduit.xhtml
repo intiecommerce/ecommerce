@@ -13,8 +13,9 @@
 	</ui:insert>
 	<h1 style="color: red; text-align: center">Formulaire pour ajouter
 		un produit</h1>
-	<h:form>
-
+		
+		
+	<h:form enctype="multipart/form-data">
 		<h:panelGrid columns="2">
 		Designation du produit: <h:inputText
 				value="#{proMB.produit.designation}" />
@@ -22,14 +23,13 @@
 				value="#{proMB.produit.description}" />
 		Prix du produit: <h:inputText value="#{proMB.produit.prix}" />
 		Quantité du produit: <h:inputText value="#{proMB.produit.quantite}" />
+		Photo: <p:fileUpload value="#{proMB.image}" mode="simple" skinSimple="true"/>
 
-<!-- 		Id de la catégorie: <h:inputText value="#{proMB.produit.categorie.idCategorie}" /> -->
 		
-		Catégorie du produit: <p:selectOneMenu
-				value="#{proMB.produit.categorie}">
-				<ui:repeat var="cat" value="#{sessionScope.catSession}">
-					<f:selectItem itemLabel="2" value="#{cat}"/>
-				</ui:repeat>
+		Catégorie du produit: <p:selectOneMenu value="#{proMB.produit.categorie.idCategorie}">
+	
+					<f:selectItems value="#{sessionScope.catSession}" var="cat" itemLabel="#{cat.nomCategorie}" itemValue="#{cat.idCategorie}"/>
+
 			</p:selectOneMenu>
 	
 

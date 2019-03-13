@@ -11,9 +11,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name="produits")
@@ -29,7 +31,10 @@ public class Produit {
 	private double prix;
 	private int quantite;
 	private boolean selectionne=false;
+	@Lob
 	private byte[] photo;
+	@Transient
+	private String image;
 	
 	//transformation
 	@ManyToOne
@@ -61,7 +66,7 @@ public class Produit {
 		this.photo = photo;
 	}
 	public Produit() {
-		this.categorie=new Categorie();
+		super();
 	}
 	
 	//getter et setter
@@ -125,6 +130,13 @@ public class Produit {
 	public void setListeLigneCommandes(List<LigneCommande> listeLigneCommandes) {
 		this.listeLigneCommandes = listeLigneCommandes;
 	}
+	public String getImage() {
+		return image;
+	}
+	public void setImage(String image) {
+		this.image = image;
+	}
+
 	
 	
 }

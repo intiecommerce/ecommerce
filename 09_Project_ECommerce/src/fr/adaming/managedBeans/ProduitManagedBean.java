@@ -10,6 +10,9 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
+import org.primefaces.model.UploadedFile;
+
+import fr.adaming.model.Categorie;
 import fr.adaming.model.Produit;
 import fr.adaming.service.IProduitService;
 
@@ -24,9 +27,12 @@ public class ProduitManagedBean {
 
 	private HttpSession maSession;
 
+	private UploadedFile image;
+	
 	// constructeur
 	public ProduitManagedBean() {
 		this.produit = new Produit();
+		this.produit.setCategorie(new Categorie());
 	}
 
 	@PostConstruct // cette annotation sert à dire que la méthode doit etre
@@ -46,8 +52,22 @@ public class ProduitManagedBean {
 		this.produit = produit;
 	}
 
+	public UploadedFile getImage() {
+		return image;
+	}
+
+	public void setImage(UploadedFile image) {
+		this.image = image;
+	}
+
 	// methode
 	public String ajouterProduit(){
+		
+		if(this.image != null){
+			this.produit.setPhoto(this.image.getContents());
+			
+		}
+		
 		//appel de la methode service
 		Produit pAjout=proService.addProduit(this.produit);
 		

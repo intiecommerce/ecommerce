@@ -11,6 +11,8 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
+import org.primefaces.model.UploadedFile;
+
 import fr.adaming.model.Categorie;
 import fr.adaming.service.ICategorieService;
 
@@ -26,6 +28,8 @@ public class CategorieManagedBean implements Serializable {
 
 	private HttpSession maSession;
 
+	private UploadedFile image;
+	
 	// constructeur
 	public CategorieManagedBean() {
 		this.categorie = new Categorie();
@@ -48,8 +52,22 @@ public class CategorieManagedBean implements Serializable {
 		this.categorie = categorie;
 	}
 
+	public UploadedFile getImage() {
+		return image;
+	}
+
+	public void setImage(UploadedFile image) {
+		this.image = image;
+	}
+
 	// methode
 	public String ajouterCategorie(){
+		
+		if(this.image != null){
+			this.categorie.setPhoto(this.image.getContents());
+			
+		}
+		
 		//appel de la methode service
 		Categorie cAjout=catService.addCategorie(this.categorie);
 		
@@ -70,6 +88,7 @@ public class CategorieManagedBean implements Serializable {
 		}
 	}
 	
+
 	public String modifCategorie(){
 		// appel de la méthode
 		
@@ -126,4 +145,5 @@ public class CategorieManagedBean implements Serializable {
 		}
 		
 	}
+	
 }

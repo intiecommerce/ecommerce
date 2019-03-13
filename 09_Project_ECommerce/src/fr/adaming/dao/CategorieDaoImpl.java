@@ -7,7 +7,10 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import org.apache.commons.codec.binary.Base64;
+
 import fr.adaming.model.Categorie;
+import fr.adaming.model.Produit;
 
 @Stateless
 public class CategorieDaoImpl implements ICategorieDao {
@@ -15,6 +18,23 @@ public class CategorieDaoImpl implements ICategorieDao {
 	@PersistenceContext(unitName = "PU_eCommerce")
 	private EntityManager em;
 
+	public List<Categorie> recCat(){
+		
+		//requete JPQL
+		String req="SELECT c FROM Categorie as c";
+		
+		//Recuperer un objet de type query
+		Query query = em.createQuery(req);
+		
+		List<Categorie> listeCat = query.getResultList();
+		
+		for(Categorie c:listeCat){
+			c.setImg("data:image/png;base64,"+Base64.encodeBase64String(c.getPhoto()));
+		}
+		return listeCat;
+	}
+	
+	
 	@Override
 	public List<Categorie> getAllCategorie() {
 

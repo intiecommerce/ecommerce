@@ -27,6 +27,12 @@
 			<p:column headerText="Description de la catégorie">
 				<h:outputText value="#{cat.description}" />
 			</p:column>
+			
+				<p:column headerText="Photo de la catégorie">
+				<h:graphicImage value="#{cat.img}" />
+			</p:column>
+			
+			
 
 
 
@@ -67,8 +73,9 @@
 				<h:outputText value="#{pro.quantite}" />
 			</p:column>
 			
-				<p:column headerText="Nom de la catégorie">
-				<h:outputText value="#{pro.categorie.nomCategorie}" />
+			
+			<p:column headerText="Photo du produit">
+				<h:graphicImage value="#{pro.image}" />
 			</p:column>
 
 

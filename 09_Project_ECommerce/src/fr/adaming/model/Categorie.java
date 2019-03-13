@@ -10,8 +10,10 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name="categories")
@@ -24,7 +26,10 @@ public class Categorie {
 	@Column(name="id_cat")
 	private int idCategorie;
 	private String nomCategorie;
+	@Lob
 	private byte[] photo;
+	@Transient
+	private String img;
 	private String description;
 	
 	//transformation
@@ -79,6 +84,12 @@ public class Categorie {
 	}
 	public void setListeProduits(List<Produit> listeProduits) {
 		this.listeProduits = listeProduits;
+	}
+	public String getImg() {
+		return img;
+	}
+	public void setImg(String img) {
+		this.img = img;
 	}
 	
 	
