@@ -7,7 +7,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
-import fr.adaming.model.Admin;
 import fr.adaming.model.Produit;
 @Stateless
 public class ProduitDaoImpl implements IProduitDao{
@@ -30,27 +29,43 @@ public class ProduitDaoImpl implements IProduitDao{
 	}
 
 	@Override
-	public Produit addProduit(Produit cIn) {
-		// TODO Auto-generated method stub
-		return null;
+	public Produit addProduit(Produit pIn) {
+		em.persist(pIn);
+		return pIn;
 	}
 
 	@Override
-	public int modifProduit(Produit cIn) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int modifProduit(Produit pIn) {
+		String req = "UPDATE Produit as p SET p.designation=:pDesi, p.description=:pDesc, p.prix=:pPri, p.quantite=:pQua, p.selectionne=:pSel WHERE idProduit=:pId";
+		Query queryJPQL = em.createQuery(req);
+
+		// passage des parametres
+		queryJPQL.setParameter("pDesi", pIn.getDesignation());
+		queryJPQL.setParameter("pDesc", pIn.getDescription());
+		queryJPQL.setParameter("pPri", pIn.getPrix());
+		queryJPQL.setParameter("pQua", pIn.getQuantite());
+		queryJPQL.setParameter("pSel", pIn.isSelectionne());
+		queryJPQL.setParameter("pId", pIn.getIdProduit());
+
+		return queryJPQL.executeUpdate();
 	}
 
 	@Override
-	public int supprProduit(Produit cIn) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int supprProduit(Produit pIn) {
+		String req = "Delete Produit as p WHERE idProduit=:pId";
+
+		Query queryJPQL = em.createQuery(req);
+
+		// passage des parametres
+		queryJPQL.setParameter("pId", pIn.getIdProduit());
+
+		return queryJPQL.executeUpdate();
 	}
 
 	@Override
-	public Produit getProduitById(Produit cIn) {
-		// TODO Auto-generated method stub
-		return null;
+	public Produit getProduitById(Produit pIn) {
+		Produit pOut = em.find(Produit.class, pIn.getIdProduit());
+		return pOut;
 	}
 
 }

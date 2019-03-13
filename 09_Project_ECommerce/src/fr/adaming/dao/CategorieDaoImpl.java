@@ -7,7 +7,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
-import fr.adaming.model.Admin;
 import fr.adaming.model.Categorie;
 
 @Stateless
@@ -31,26 +30,42 @@ public class CategorieDaoImpl implements ICategorieDao {
 
 	@Override
 	public Categorie addCategorie(Categorie cIn) {
-		// TODO Auto-generated method stub
-		return null;
+		em.persist(cIn);
+		return cIn;
 	}
 
 	@Override
 	public int modifCategorie(Categorie cIn) {
-		// TODO Auto-generated method stub
-		return 0;
+
+		String req = "UPDATE Categorie as c SET c.nomCategorie=:pCat, c.description=:pDes WHERE idCategorie=:pId";
+		Query queryJPQL = em.createQuery(req);
+
+		// passage des parametres
+		queryJPQL.setParameter("pCat", cIn.getNomCategorie());
+		queryJPQL.setParameter("pDes", cIn.getDescription());
+		queryJPQL.setParameter("pId", cIn.getIdCategorie());
+
+		return queryJPQL.executeUpdate();
 	}
 
 	@Override
 	public int supprCategorie(Categorie cIn) {
-		// TODO Auto-generated method stub
-		return 0;
+
+		String req = "Delete Categorie as c WHERE idCategorie=:pId";
+
+		Query queryJPQL = em.createQuery(req);
+
+		// passage des parametres
+		queryJPQL.setParameter("pId", cIn.getIdCategorie());
+
+		return queryJPQL.executeUpdate();
+
 	}
 
 	@Override
 	public Categorie getCategorieById(Categorie cIn) {
-		// TODO Auto-generated method stub
-		return null;
+		Categorie cOut = em.find(Categorie.class, cIn.getIdCategorie());
+		return cOut;
 	}
 
 }

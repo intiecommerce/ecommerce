@@ -28,7 +28,7 @@ public class Produit {
 	private String description;
 	private double prix;
 	private int quantite;
-	private boolean selectionne;
+	private boolean selectionne=false;
 	private byte[] photo;
 	
 	//transformation
@@ -61,7 +61,7 @@ public class Produit {
 		this.photo = photo;
 	}
 	public Produit() {
-		super();
+		this.categorie=new Categorie();
 	}
 	
 	//getter et setter

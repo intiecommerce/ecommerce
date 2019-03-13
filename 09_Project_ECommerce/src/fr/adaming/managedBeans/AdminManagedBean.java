@@ -62,8 +62,8 @@ public class AdminManagedBean implements Serializable{
 			List<Produit> pListe=pService.getAllProduit();
 			
 			//mettre les listes dans la session
-			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("aSession", cListe);
-			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("aSession", pListe);
+			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("catSession", cListe);
+			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("proSession", pListe);
 
 			return "accueilAdmin";
 		} else {

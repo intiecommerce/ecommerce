@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateful;
+import javax.faces.view.EditableValueHolderAttachedObjectHandler;
 
 import fr.adaming.dao.ICategorieDao;
 import fr.adaming.model.Categorie;
@@ -22,26 +23,26 @@ public class CategorieServiceImpl implements ICategorieService {
 
 	@Override
 	public Categorie addCategorie(Categorie eIn) {
-		// TODO Auto-generated method stub
-		return null;
+	
+		return cDao.addCategorie(eIn);
 	}
 
 	@Override
 	public int modifCategorie(Categorie eIn) {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		return cDao.modifCategorie(eIn);
 	}
 
 	@Override
 	public int supprCategorie(Categorie eIn) {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		return cDao.supprCategorie(eIn);
 	}
 
 	@Override
 	public Categorie getCategorieById(Categorie eIn) {
-		// TODO Auto-generated method stub
-		return null;
+	
+		return cDao.getCategorieById(eIn);
 	}
 
 }

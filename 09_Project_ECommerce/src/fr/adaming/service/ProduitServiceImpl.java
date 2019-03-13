@@ -20,27 +20,27 @@ public class ProduitServiceImpl implements IProduitService {
 	}
 
 	@Override
-	public Produit addProduit(Produit eIn) {
-		// TODO Auto-generated method stub
-		return null;
+	public Produit addProduit(Produit pIn) {
+		
+		return pDao.addProduit(pIn);
 	}
 
 	@Override
-	public int modifProduit(Produit eIn) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int modifProduit(Produit pIn) {
+		
+		return pDao.modifProduit(pIn);
 	}
 
 	@Override
-	public int supprProduit(Produit eIn) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int supprProduit(Produit pIn) {
+	
+		return pDao.supprProduit(pIn);
 	}
 
 	@Override
-	public Produit getProduitById(Produit eIn) {
-		// TODO Auto-generated method stub
-		return null;
+	public Produit getProduitById(Produit pIn) {
+		
+		return pDao.getProduitById(pIn);
 	}
 
 }

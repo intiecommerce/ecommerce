@@ -74,11 +74,6 @@ public class Categorie {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	@Override
-	public String toString() {
-		return "Categorie [idCategorie=" + idCategorie + ", nomCategorie=" + nomCategorie + ", photo="
-				+ Arrays.toString(photo) + ", description=" + description + "]";
-	}
 	public List<Produit> getListeProduits() {
 		return listeProduits;
 	}
