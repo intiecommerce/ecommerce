@@ -1,5 +1,7 @@
 package fr.adaming.managedBeans;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -18,7 +20,7 @@ import fr.adaming.service.IProduitService;
 
 @ManagedBean(name="proMB")
 @RequestScoped
-public class ProduitManagedBean {
+public class ProduitManagedBean implements Serializable{
 	// transformation de l'association UML en java
 	@EJB
 	private IProduitService proService;
@@ -36,6 +38,7 @@ public class ProduitManagedBean {
 	public ProduitManagedBean() {
 		this.produit = new Produit();
 		this.produit.setCategorie(new Categorie());
+		this.produit.getCategorie().setListeProduits(new ArrayList<Produit>());
 	}
 
 	@PostConstruct // cette annotation sert à dire que la méthode doit etre
@@ -180,6 +183,24 @@ public class ProduitManagedBean {
 					new FacesMessage("Echoué"));
 			return "accueilClient";
 		}
+	}
+	
+	public String afficherProduit(){
+		
+		List<Produit> listeProduit = proService.afficherProduit(produit);
+		
+		if(listeProduit !=null){
+			
+			tableVisible=true;
+			maSession.setAttribute("proSession", listeProduit);
+			return "accueilClient";
+		}else{
+			tableVisible=false;
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage("Echoué"));
+			return "accueilClient";
+		}
+	
 	}
 	
 	

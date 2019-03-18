@@ -137,6 +137,8 @@ public class Produit {
 		this.image = image;
 	}
 
+
+
 	
 	
 }

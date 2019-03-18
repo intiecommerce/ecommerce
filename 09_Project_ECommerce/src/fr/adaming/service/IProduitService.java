@@ -17,5 +17,7 @@ public interface IProduitService {
 	public Produit getProduitById(Produit eIn);
 	
 	public List<Produit> chercherProduitParCategorie(Categorie cIn);
+	
+	public List<Produit> afficherProduit(Produit pIn);
 
 }

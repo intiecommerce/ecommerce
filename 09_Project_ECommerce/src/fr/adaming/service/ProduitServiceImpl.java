@@ -1,5 +1,6 @@
 package fr.adaming.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -48,6 +49,13 @@ public class ProduitServiceImpl implements IProduitService {
 	public List<Produit> chercherProduitParCategorie(Categorie cIn) {
 		
 		return pDao.chercherProduitParCategorie(cIn);
+	}
+
+	@Override
+	public List<Produit> afficherProduit(Produit pIn) {
+		pIn.setCategorie(new Categorie());
+		
+		return pDao.afficherProduit(pIn);
 	}
 
 }

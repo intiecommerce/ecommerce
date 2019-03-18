@@ -21,5 +21,9 @@ public interface IProduitDao {
 	public Produit getProduitById(Produit cIn);
 	
 	public List<Produit> chercherProduitParCategorie(Categorie cIn);
+	
+	public List<Produit> afficherProduit(Produit pIn);
+	
+	
 
 }

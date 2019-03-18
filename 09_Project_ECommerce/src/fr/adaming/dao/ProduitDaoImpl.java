@@ -107,5 +107,22 @@ public class ProduitDaoImpl implements IProduitDao{
 		return query.getResultList();
 
 	}
+	
+	public List<Produit> afficherProduit(Produit pIn){
+		
+		// Requete JPQL
+
+		String req = "SELECT p FROM Produit as p WHERE p.categorie.listeProduits=:pId";
+		
+		// recuperer un objet de type Query
+		Query query = em.createQuery(req);
+		
+		// passage des parametres
+		query.setParameter("pId", pIn.getCategorie().getListeProduits());
+
+		return query.getResultList();
+	}
+
+
 
 }

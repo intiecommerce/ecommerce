@@ -18,43 +18,40 @@
 			<h:commandButton value="Selectionner la catégorie" action="#{proMB.chercherProduitParCategorie}" />
 </h:form>
 
-<h:form rendered ="#{proMB.listeVisible}">
-		Produit: <p:selectManyMenu value="#{proMB.produit.categorie.listeProduits}" showCheckbox="true">
-	
-					<f:selectItems value="#{sessionScope.proSession}" var="pro" itemLabel="#{pro.designation}" itemValue="#{pro.idProduit}"/>
 
-			</p:selectManyMenu>
-			<h:commandButton value="Selectionner les produits" action="#{proMB.afficherProduit}" />
-</h:form>
-
-<h:form rendered="#{proMB.tableVisible}">
+<h:form rendered="#{proMB.listeVisible}">
 		<h1 style="color: red; text-align: center">Liste des produits</h1>
-		<p:dataTable var="pro" value="#{sessionScope.proSession}" id="Tab">
+		<p:dataTable var="pr" value="#{sessionScope.proSession}" id="Tab">
 			<p:column headerText="ID du produit">
-				<h:outputText value="#{pro.idProduit}" />
+				<h:outputText value="#{pr.idProduit}" />
 			</p:column>
 
 			<p:column headerText="Designation du produit">
-				<h:outputText value="#{pro.designation}" />
+				<h:outputText value="#{pr.designation}" />
 			</p:column>
 
 			<p:column headerText="Description">
-				<h:outputText value="#{pro.description}" />
+				<h:outputText value="#{pr.description}" />
 			</p:column>
 
 			<p:column headerText="Prix">
-				<h:outputText value="#{pro.prix}" />
+				<h:outputText value="#{pr.prix}" />
 			</p:column>
 
 			<p:column headerText="Quantité">
-				<h:outputText value="#{pro.quantite}" />
+				<h:outputText value="#{pr.quantite}" />
 			</p:column>
-			
 			
 			<p:column headerText="Photo du produit">
 				<h:graphicImage value="#{pro.image}" />
 			</p:column>
+			
+		<p:column headerText="Operation">
+			<p:commandLink value="Ajouter au panier" action="#{clMB.ajouterProduit}" update="Tab">
+			<f:setPropertyActionListener value="#{pr.idProduit}" target="#{clMB.produit.idProduit}"/>
+			</p:commandLink>
 
+		</p:column>
 		</p:dataTable>
 	</h:form>
 	

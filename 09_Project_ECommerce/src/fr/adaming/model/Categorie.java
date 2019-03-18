@@ -91,6 +91,12 @@ public class Categorie {
 	public void setImg(String img) {
 		this.img = img;
 	}
+	@Override
+	public String toString() {
+		return "Categorie [idCategorie=" + idCategorie + ", nomCategorie=" + nomCategorie + ", photo="
+				+ Arrays.toString(photo) + ", img=" + img + ", description=" + description + ", listeProduits="
+				+ listeProduits + "]";
+	}
 	
 	
 
